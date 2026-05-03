@@ -25,7 +25,7 @@ public class OrderPlacementTestClass extends BaseTest {
         loginPage.doLogin();
         Assert.assertTrue(homePage.isHomePageDisplayed());
 
-        String name = "Sauce Labs Backpack";
+        String name = propertyReaderUtils.getProperty("productName");
         homePage.clickOnProductName(name);
 
         Assert.assertEquals(productDetailPage.getProductDetailPageTitle(), name);
@@ -37,7 +37,7 @@ public class OrderPlacementTestClass extends BaseTest {
         Assert.assertEquals(cartPage.getItemNameOnCart(), name);
         cartPage.clickOnCheckOutBtn();
 
-        checkoutPage.checkOutInfo("The Great", "Arslan", "1234");
+        checkoutPage.checkOutInfo(propertyReaderUtils.getProperty("firstName"), propertyReaderUtils.getProperty("lastName"), propertyReaderUtils.getProperty("postalCode"));
         checkoutPage.clickOnContinue();
 
         Assert.assertEquals(reviewPage.getItemNameOnReviewPage(), name);
@@ -46,5 +46,4 @@ public class OrderPlacementTestClass extends BaseTest {
         Assert.assertEquals(orderConfirmationPage.getSuccessMsg(), "Thank you for your order!");
 
     }
-
 }

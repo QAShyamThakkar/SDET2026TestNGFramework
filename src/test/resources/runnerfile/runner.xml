@@ -1,0 +1,7 @@
+<suite name="Trump" verbose="3">
+    <test name="Regression1">
+        <packages>
+            <package name="com.automation.test"/>
+        </packages>
+    </test>
+</suite>

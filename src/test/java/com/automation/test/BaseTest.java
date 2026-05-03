@@ -1,6 +1,7 @@
 package com.automation.test;
 
 import com.automation.pages.*;
+import com.automation.utils.PropertyReaderUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -20,6 +21,7 @@ public class BaseTest {
     CheckoutPage checkoutPage;
     ReviewPage reviewPage;
     OrderConfirmationPage orderConfirmationPage;
+    PropertyReaderUtils propertyReaderUtils;
 
 
     @BeforeMethod
@@ -33,8 +35,11 @@ public class BaseTest {
 
         options.setExperimentalOption("prefs", prefs);
 
+        propertyReaderUtils = new PropertyReaderUtils();
+        propertyReaderUtils.initProperty();
+
         driver = new ChromeDriver(options);
-        driver.get("https://www.saucedemo.com/");
+        driver.get(propertyReaderUtils.getProperty("url"));
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
@@ -45,6 +50,8 @@ public class BaseTest {
         checkoutPage = new CheckoutPage(driver);
         reviewPage = new ReviewPage(driver);
         orderConfirmationPage = new OrderConfirmationPage(driver);
+
+
 
     }
 
