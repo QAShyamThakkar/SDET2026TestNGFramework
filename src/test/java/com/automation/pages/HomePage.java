@@ -33,4 +33,26 @@ public class HomePage extends BasePage {
     }
 
 
+    public void selectFilterOption(String filterValue) {
+        Select select = new Select(filterDropdown);
+        select.selectByVisibleText(filterValue);
+    }
+
+    public boolean isProductSortedByPriceLowToHigh() {
+        double previousPrice = 0;
+        boolean b = true;
+
+        for (WebElement eachPrice : listOfPrices) {
+            String priceText = eachPrice.getText().replace("$", ""); //All the price
+            double currentPrice = Double.parseDouble(priceText); // Converting String to double
+
+            if (currentPrice > previousPrice) {
+                b = false;
+            }
+            previousPrice = currentPrice;
+
+        }
+        return b;
+
+    }
 }
